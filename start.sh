@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# Kill old tmate session if exists
+tmate -S /tmp/tmate.sock kill-server 2>/dev/null || true
+
 # Start dummy HTTP server to keep Render Web Service alive
 python3 -m http.server 8080 &
 
-# Start tmate in background
+# Start new tmate session in background
 tmate -S /tmp/tmate.sock new-session -d
 
 # Wait for tmate to be ready
